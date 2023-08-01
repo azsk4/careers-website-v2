@@ -1,6 +1,4 @@
-# specify certain libraries
-
 Flask
-gunicorn  # to put Flask application into production
+gunicorn
 sqlalchemy
 pymysql
