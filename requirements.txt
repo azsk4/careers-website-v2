@@ -2,3 +2,5 @@
 
 Flask
 gunicorn  # to put Flask application into production
+sqlalchemy
+pymysql
