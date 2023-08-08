@@ -1,5 +1,5 @@
-from flask import Flask, render_template, jsonify
-from database import load_jobs_from_db, load_job_from_db
+from flask import Flask, render_template, jsonify, request
+from database import load_jobs_from_db, load_job_from_db, add_application_to_db
 
 app = Flask(__name__)  # created a flask app
 
@@ -22,6 +22,14 @@ def show_job(id):
   return render_template('jobpage.html', 
                          job=job)
 
+@app.route("/job/<id>/apply", methods=['post'])
+def apply_to_job(id):
+  data = request.form
+  job = load_job_from_db(id)
+  add_application_to_db(id, data)
+  return render_template('application_submitted.html', application=data, job=job)
+
+
+
 if __name__ == "__main__":  # checked if we are runnning the app.py file
-  app.run(host='0.0.0.0', port = 8080, debug=True)  # start the app using app.run
-  
+  app.run(host='0.0.0.0', debug=True)  # start the app using app.run  
